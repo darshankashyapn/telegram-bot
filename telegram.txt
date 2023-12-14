@@ -1,0 +1,29 @@
+import requests
+from datetime import datetime
+import pytz #used for date time conversion and timezone calculations.
+
+IST = pytz.timezone('Asia/Kolkata')
+raw_TS = datetime.now(IST)
+curr_date = raw_TS.strftime("%d/%m/%y")
+curr_time = raw_TS.strftime("%H-%M-%S")
+
+telegram_auth_token = "6508085918:AAHneNSvmI3sC0BwBA5sYCl0yp2YFy1Vkag"
+telegram_group_id = "medicine_notifier"
+
+msg = f"Message recieved on {curr_date} at {curr_time}"
+
+def send_sms(message):
+ telegram_api_url = f"https://api.                   telegram.org/bot{telegram_auth_token}/                               sendMessage?chat_id=@{telegram_group     _id}&text={message}"                   
+	   
+	tel_resp = requests.                                         get(telegram_api_url)
+	
+	if tel_resp.status.code == 200 :
+		print("Notification is sent on                          Telegram")
+	else:
+		print("error:could not send msg")
+		
+send_sms(msg)
+			
+			
+	
+	
